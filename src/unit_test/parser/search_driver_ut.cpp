@@ -77,6 +77,14 @@ int ParseStream(const SearchDriver &driver, std::istream &ist) {
     return 0;
 }
 
+TEST_F(SearchDriverTest, unescape_reserved_characters) {
+    EXPECT_EQ(SearchDriver::Unescape(R"(PPR\-9087)"), "PPR-9087");
+    EXPECT_EQ(SearchDriver::Unescape(R"(first\ name)"), "first name");
+    EXPECT_EQ(SearchDriver::Unescape(R"(book\*)"), "book*");
+    EXPECT_EQ(SearchDriver::Unescape(R"(field\:value)"), "field:value");
+    EXPECT_EQ(SearchDriver::Unescape(R"(path\\name)"), R"(path\name)");
+}
+
 TEST_F(SearchDriverTest, good_test1) {
     using namespace infinity;
 

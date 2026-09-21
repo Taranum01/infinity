@@ -317,6 +317,7 @@ std::string SearchDriver::Unescape(const std::string &text) {
                 case '*':
                 case '?':
                 case ':':
+                case '-':
                 case '\\':
                     result.push_back(text[i + 1]);
                     ++i;
